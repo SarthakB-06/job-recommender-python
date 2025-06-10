@@ -16,6 +16,10 @@ except ImportError:
 
 app = FastAPI()
 
+PORT= PORT = int(os.environ.get("PORT", 8000))
+
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+
 # Enable CORS for communication with React
 app.add_middleware(
     CORSMiddleware,
@@ -33,8 +37,9 @@ class ResumeURL(BaseModel):
 
 # Home endpoint to verify the API is running
 @app.get("/")
+@app.head("/")
 def read_root():
-    return {"message": "Resume parser API is running"}
+    return {"status": "ok", "message": "Resume parser service is running"}
 
 # File type detection functions
 def is_pdf(file_bytes):
@@ -445,4 +450,4 @@ async def view_resume(data: ResumeURL):
 
 
 if __name__ == "__main__":
-    print("Run this script with: uvicorn main:app --reload --port 8000")
+    uvicorn.run("main:app", host="0.0.0.0", port=PORT, reload=False)
