@@ -4,3 +4,5 @@ pdfplumber
 python-multipart
 pydantic
 requests
+python-docx
+gunicorn
