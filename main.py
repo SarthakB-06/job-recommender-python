@@ -25,7 +25,10 @@ ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173").spl
 # Enable CORS for communication with React
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], # React app URLs
+     allow_origins=[
+        "https://your-frontend.vercel.app",
+        "https://your-nodejs-backend.onrender.com"
+    ], # React app URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
